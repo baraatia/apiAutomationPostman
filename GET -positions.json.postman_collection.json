@@ -1,0 +1,1910 @@
+{
+	"info": {
+		"_postman_id": "8819334c-11e9-4d37-910d-a3cb33d54449",
+		"name": "GET /positions.json",
+		"description": "checking the JSON representation of any search result or job listing without providing job ID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Checking the description field",
+			"item": [
+				{
+					"name": "valid description input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    ddescription = jsonData[0][\"description\"]",
+									"    pm.expect(ddescription).to.include(\"python\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?description=python",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "python"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid description number input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    ddescription = jsonData[0][\"description\"]",
+									"    pm.expect(ddescription).to.include(\"123\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?description=123",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid description input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?description=%%%%",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "%%%%"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All Possible scenarios for description field"
+		},
+		{
+			"name": "Checking the Full_time field",
+			"item": [
+				{
+					"name": "full time = false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of part time inside the type field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"] && jsonData[1][\"type\"]",
+									"    pm.expect(type).to.include(\"Part Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?full_time=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "full_time",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "full time = true",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?full_time=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "full_time",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "full time = 123",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?full_time=123",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "full_time",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "full time = #$%",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?full_time=%%%^%%",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "full_time",
+									"value": "%%%^%%"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "full time = full time as char",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?full_time=full time",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "full_time",
+									"value": "full time"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All Possible scenarios for Full_time field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "58872f1f-98a9-4388-a6a3-4e832b38b540",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "81e1a5aa-9e3f-44d1-9bbb-3b900b982263",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Checking the latitude and longitude field",
+			"item": [
+				{
+					"name": "valid latitude & valid long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the correct appearance of provided lat and long inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"CA\",\"San Francisco\",\"Cupertino\",\"Ca\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=37.3229978&long=-122.0321823",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "37.3229978"
+								},
+								{
+									"key": "long",
+									"value": "-122.0321823"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid lat input without long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=37.3229978",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "37.3229978"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid lat char without long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=NY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "NY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid lat input without long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=%%%%%%",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "%%%%%%"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid latitude input & location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=37.3229978&location=NY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "37.3229978"
+								},
+								{
+									"key": "location",
+									"value": "NY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid long input without lat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?long=-122.032182",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "long",
+									"value": "-122.032182"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid longitude input & location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?long=-122.032182&location=New york",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "long",
+									"value": "-122.032182"
+								},
+								{
+									"key": "location",
+									"value": "New york"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid lat & valid long & location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?lat=37.3229978&long=-122.0321823&location=New york",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "37.3229978"
+								},
+								{
+									"key": "long",
+									"value": "-122.0321823"
+								},
+								{
+									"key": "location",
+									"value": "New york"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All Possible scenarios for latitude and longitude fields",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "72e064db-ce39-42e6-8922-dbf3624e1065",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a11d92c-1372-4c20-af12-0a9bb6db8f71",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Checking the search field",
+			"item": [
+				{
+					"name": "valid search input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the whole response\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"java\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=java",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "java"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "empty search input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "855d39dc-f00f-4776-8271-9d887bbaceb6",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid search number input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"123\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=123",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid search input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=%%%^%^$^",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "%%%^%^$^"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All Possible scenarios for search field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5b974382-f88c-44bc-8eed-80142771012d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e523131-fab2-4dce-8f28-d252d1d51200",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Checking the location field",
+			"item": [
+				{
+					"name": "valid location input without space",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "190206d2-f1a9-4e34-ae7b-d6a928e16f49",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=NewYork",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "NewYork"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid location input with space",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "190206d2-f1a9-4e34-ae7b-d6a928e16f49",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"validate the Response time to be less than 3000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=New York",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "New York"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid location number input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    desc = jsonData[0][\"description\"]",
+									"    pm.expect(desc).to.include(\"123\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=123",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid Location input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34957adf-d6c0-423c-be65-f7da323b8e61",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=%%%%%",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "%%%%%"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All Possible scenarios for location field",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e802461e-6094-459c-afbb-ca817a437f5e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcaeab83-f75f-4e6e-b554-eb45143bf53f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "checking the parametrs companation",
+			"item": [
+				{
+					"name": "valid term and location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the term inside the description field\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"JavaScript\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?description=JavaScript&location=New York",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "JavaScript"
+								},
+								{
+									"key": "location",
+									"value": "New York"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid term and location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=%%%%&location=New York",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "%%%%"
+								},
+								{
+									"key": "location",
+									"value": "New York"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid term and full_time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the term inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    des = jsonData[0][\"description\"]",
+									"    pm.expect(des).to.include(\"Javascript\");",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of Full time inside the type field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=JavaScript&full_time=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "JavaScript"
+								},
+								{
+									"key": "full_time",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid term and full_time=false",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the term inside the description field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    des = jsonData[0][\"description\"]",
+									"    pm.expect(des).to.include(\"Javascript\");",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of Full time inside the type field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Part Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=JavaScript&full_time=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "JavaScript"
+								},
+								{
+									"key": "full_time",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid location and full_time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of Full time inside the type field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=New York&full_time=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "New York"
+								},
+								{
+									"key": "full_time",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "valid location and full_time and term",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"validate the appearance of Full time inside the type field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var type = jsonData[0][\"type\"]",
+									"    pm.expect(type).to.include(\"Full Time\");",
+									"});",
+									"",
+									"pm.test(\"validate the appearance of the input inside the location field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    dLocation = jsonData[0][\"location\"] && jsonData[1][\"location\"]",
+									"    pm.expect(dLocation).to.include(\"New Yor\");",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=JavaScript&location=NY&full_time=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "JavaScript"
+								},
+								{
+									"key": "location",
+									"value": "NY"
+								},
+								{
+									"key": "full_time",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid location and full_time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?location=$%^&full_time=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "$%^"
+								},
+								{
+									"key": "full_time",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "checking all possible scenarios when providing different types of parameters"
+		},
+		{
+			"name": "checking The page field",
+			"item": [
+				{
+					"name": "checking job count without params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									"",
+									"pm.test(\"validate job count\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.be.below(51)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checking job count for page 2 without params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									"",
+									"pm.test(\"validate job count\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.be.below(51)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?page=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checking job count for page 0 without params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									"",
+									"pm.test(\"validate job count\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.be.below(51)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?page=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checking job count for page -1 without params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?page=-1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checking job count for invalid page value without param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"bad request\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?page=%%%%^",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "%%%%^"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checking jobs count with params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9885c623-7961-449d-bfa1-c68172c728e7",
+								"exec": [
+									"pm.test(\"validate Status code of 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+									"});",
+									"",
+									"pm.test(\"validate job count\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.be.below(51)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/positions.json?search=JavaScript&location=NY&full_time=true&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"positions.json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "JavaScript"
+								},
+								{
+									"key": "location",
+									"value": "NY"
+								},
+								{
+									"key": "full_time",
+									"value": "true"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "checking all possible scenarios for page field"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "67e4b5a0-1d66-49bc-bd19-3975b609a5ea",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b7ce14da-afc0-4258-b220-0fd41db08d38",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f994c4ae-717c-4fc4-a2ae-46df22be3e2e",
+			"key": "baseUrl",
+			"value": "https://jobs.github.com",
+			"type": "string"
+		}
+	]
+}

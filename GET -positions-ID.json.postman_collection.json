@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "64c86d03-5ba7-4d72-a2c5-5bf6246b744f",
+		"name": "GET /positions/ID.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All available jobs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "090fd9b2-8b20-42d4-b233-d5961d4f8a80",
+						"exec": [
+							"var bodyData = JSON.parse(responseBody);",
+							"var jobId = bodyData[0][\"id\"]",
+							"pm.environment.set(\"job_id\", jobId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/positions.json",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"positions.json"
+					]
+				},
+				"description": "Getting all available jobs"
+			},
+			"response": []
+		},
+		{
+			"name": "user information with valid id",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b04f05c1-4f92-4aae-a8bf-fac1ca9add86",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "602682b9-8ab7-4741-b7b6-4b5492934f46",
+						"exec": [
+							"pm.test(\"validate Status code of 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate the job ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"job_id\"));",
+							"});",
+							"",
+							"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/positions/{{job_id}}.json",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"positions",
+						"{{job_id}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user information with invalid id",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b04f05c1-4f92-4aae-a8bf-fac1ca9add86",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "602682b9-8ab7-4741-b7b6-4b5492934f46",
+						"exec": [
+							"pm.test(\"validate Status code of 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"Not Found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/positions/123.json",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"positions",
+						"123.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user information with markdown = true",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b04f05c1-4f92-4aae-a8bf-fac1ca9add86",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "602682b9-8ab7-4741-b7b6-4b5492934f46",
+						"exec": [
+							"pm.test(\"validate Status code of 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate the appearance of how_to_apply field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.how_to_apply).to.exist;",
+							"});",
+							"",
+							"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/positions/{{job_id}}.json?markdown=true",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"positions",
+						"{{job_id}}.json"
+					],
+					"query": [
+						{
+							"key": "markdown",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user information with markdown = false",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b04f05c1-4f92-4aae-a8bf-fac1ca9add86",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "602682b9-8ab7-4741-b7b6-4b5492934f46",
+						"exec": [
+							"pm.test(\"validate Status code of 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate the appearance of how_to_apply field\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.how_to_apply).to.not.exist;",
+							"});",
+							"",
+							"pm.test(\"validate the Response time to be less than 3500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3500);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/positions/{{job_id}}.json?markdown=false",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"positions",
+						"{{job_id}}.json"
+					],
+					"query": [
+						{
+							"key": "markdown",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "40de1646-cbb9-469a-9306-74fc5ddec691",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1aef74ab-2fd9-4840-8935-e6171b69df64",
+				"type": "text/javascript",
+				"exec": [
+					"pm.globals.unset(\"type\",\"id\",\"location\",\"description\");"
+				]
+			}
+		}
+	]
+}
