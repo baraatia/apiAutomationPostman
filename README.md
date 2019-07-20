@@ -1,5 +1,5 @@
 # api Automation Postman Collections.
-This repository holds three of postman collections, that cover Functional and smoke testing by focusing on the acceptance conditions.
+This repository holds three of postman collections and one environment variables file, that cover Functional and smoke testing by focusing on the acceptance conditions.
 
 These examples have been created for use with the Postman utility. Postman is a testing framework for REST APIs. The tool can be downloaded from www.getpostman.com.
 
